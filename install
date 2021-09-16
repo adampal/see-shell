@@ -1,0 +1,39 @@
+#! /usr/bin/env ruby
+
+require 'io/console'
+require 'fileutils'
+
+puts "Welcome to See Shell!"
+puts ""
+puts "This action will pull down the latest version of see-shell and initialize all your custom scripts."
+puts "Do you want to continue? (yY)"
+response = STDIN.getch.chomp
+
+if response.downcase != "y"
+  puts "Script cancelled"
+  exit
+end
+
+puts "Pulling the latest versions of scripts from GitHub..."
+`git pull origin main`
+
+
+# Install the ss script
+from = File.join Dir.pwd, "utils", "ss"
+to = "/usr/local/bin/ss"
+puts "Creating the symlink to the ss script..."
+puts `ln -sf #{from} #{to}`
+
+puts `/usr/local/bin/ss install`
+
+
+
+puts "Running the ss init script to add any custom scripts you may already have"
+puts `/usr/local/bin/ss init`
+
+puts ""
+puts "See Shell has been installed and initialized."
+puts "You can now use the `ss` command to do things like:"
+puts "`ss make a-script`"
+puts ""
+exit

@@ -1,0 +1,39 @@
+#! /usr/bin/env ruby
+
+Dir["./utils/*.rb"].each { |file| require file }
+
+include Init
+include Make
+include Remove
+include Reload
+include Install
+
+case ARGV[0]&.downcase
+when 'install'
+  puts install_ss
+when 'init'
+  puts "Running the ss init script..."
+  puts init
+when 'uninstall'
+  puts "Running the uninstaller..."
+when 'make', 'mk'
+  if ARGV[1].nil?
+    puts "Show help as no script name given"
+  else
+    puts make ARGV[1]
+  end
+when 'edit'
+  puts "Opening an editor to edit this script if it exists"
+when 'rm'
+  puts rm ARGV[1]
+when 'empty-trash'
+  puts "Emptying the trash"
+when 'help'
+  puts "Here's the help"
+when ''
+  puts "No input"
+  puts "Show help?"
+else
+  puts "Unknown input"
+  puts "Show help?"
+end
