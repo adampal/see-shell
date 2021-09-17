@@ -16,3 +16,10 @@ To remove a shell script you no longer need, run `rms my-old-script`
 This will move the script to your deleted folder.  This way, if you have the script on another computer it will be removed the next time you initialize see-shell there too.
 
 
+###########
+
+Continue from:
+
+For some reason the sym links are not working.
+
+Also, reloading the shell does not work. I think this is because it spins up its own shell and it gets reloaded there instead of in the context of the actual current user's shell.
